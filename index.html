@@ -212,7 +212,7 @@
                     <div class="col-sm-4">
                         <h2>Select one of them</h2>
                         <div class="radio">
-                            <label><input type="radio" name="radio-buttons" id="own-or-rent" value="Oen or Rent"> Own or
+                            <label><input type="radio" name="radio-buttons" id="own-or-rent" value="Own or Rent"> Own or
                                 Rent</label>
                         </div>
                         <div class="radio">
@@ -632,10 +632,11 @@
                 var cboxes = document.getElementsByName('have[]');
                 var len = cboxes.length;
                 for (var i = 0; i < len; i++) {
-                    if (cboxes[i].checked == 'checked') {
-                        checkedValue += cboxes[i].value;
+                    if (cboxes[i].checked) {
+                        checkedValue += cboxes[i].value + ", ";
                     }
                 }
+                console.log(checkedValue);
                 document.getElementById("d-have-you-had").innerHTML = checkedValue;
             }
         }
