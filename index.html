@@ -9,19 +9,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <title>Form Validation</title>
+    <style>
+        .hid {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
 
     <div class="container">
         <h1>AtMed Patient Registration Form</h1>
-        <form action="#">
+        <form action="#" id="form">
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="first-name">First Name</label>
                         <input type="text" class="form-control" id="first-name" placeholder="First Name" required>
-                        <span id="msg-first-name" class="text-danger">Must be length of 1 to 30, numbers and special
+                        <span id="msg-first-name" class="text-danger hid">Must be length of 1 to 30, numbers and special
                             characters are not allowed</span>
                     </div>
                 </div>
@@ -29,7 +34,8 @@
                     <div class="form-group">
                         <label for="middle-initial">Middle Initial</label>
                         <input type="text" class="form-control" id="middle-initial" placeholder="Middle Initial">
-                        <span id="msg-middle-name" class="text-danger">1 or no character, numbers and special characters
+                        <span id="msg-middle-name" class="text-danger hid">1 or no character, numbers and special
+                            characters
                             are not allowed</span>
                     </div>
                 </div>
@@ -37,7 +43,7 @@
                     <div class="form-group">
                         <label for="last-name">Last Name</label>
                         <input type="text" class="form-control" id="last-name" placeholder="Last Name" required>
-                        <span id="msg-last-name" class="text-danger">Must be length of 1 to 30, numbers and special
+                        <span id="msg-last-name" class="text-danger hid">Must be length of 1 to 30, numbers and special
                             characters are not allowed</span>
                     </div>
                 </div>
@@ -45,15 +51,16 @@
                     <div class="form-group">
                         <label for="date-of-birth">Date of Birth</label>
                         <input type="date" class="form-control" id="date-of-birth" required>
-                        <span id="msg-date-of-birth" class="text-danger">Date of Birth must be in between 120 years age
+                        <span id="msg-date-of-birth" class="text-danger hid">Date of Birth must be in between 120 years
+                            age
                             and in present</span>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="social-security">Social Security</label>
-                        <input type="date" class="form-control" id="social-security">
-                        <span id="msg-social-security" class="text-danger">Do not use your real social when testing,
+                        <input type="numeric" class="form-control" id="social-security">
+                        <span id="msg-social-security" class="text-danger hid">Do not use your real social when testing,
                             must be 9 digits</span>
                     </div>
                 </div>
@@ -63,7 +70,7 @@
                             <label for="address-line-1">Address Line 1</label>
                             <input type="text" class="form-control" id="address-line-1" placeholder="Address Line 1"
                                 required>
-                            <span id="msg-address-line-1" class="text-danger">Must be between in 2 to 30
+                            <span id="msg-address-line-1" class="text-danger hid">Must be between in 2 to 30
                                 characters</span>
                         </div>
                     </div>
@@ -71,7 +78,7 @@
                         <div class="form-group">
                             <label for="address-line-2">Address Line 2</label>
                             <input type="text" class="form-control" id="address-line-2" placeholder="Address Line 2">
-                            <span id="msg-address-line-2" class="text-danger">Null or Must be between in 2 to 30
+                            <span id="msg-address-line-2" class="text-danger hid">Null or Must be between in 2 to 30
                                 characters</span>
                         </div>
                     </div>
@@ -79,7 +86,7 @@
                         <div class="form-group">
                             <label for="city">City</label>
                             <input type="text" class="form-control" id="city" placeholder="City" required>
-                            <span id="msg-city" class="text-danger">Must be between in 2 to 30
+                            <span id="msg-city" class="text-danger hid">Must be between in 2 to 30
                                 characters</span>
                         </div>
                     </div>
@@ -148,15 +155,15 @@
                         <div class="form-group">
                             <label for="zip-code">Zip Code</label>
                             <input type="numeric" class="form-control" id="zip-code" placeholder="Zip Code" required>
-                            <span id="msg-zip-code" class="text-danger">Must 5 digit number</span>
+                            <span id="msg-zip-code" class="text-danger hid">Must 5 digit number</span>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="email-address">Zip Code</label>
+                            <label for="email-address">Email Address</label>
                             <input type="email" class="form-control" id="email-address" placeholder="Email Address"
                                 required>
-                            <span id="msg-email-address" class="text-danger">Must in email format e.g
+                            <span id="msg-email-address" class="text-danger hid">Must in email format e.g
                                 name@something.somewhere</span>
                         </div>
                     </div>
@@ -164,12 +171,224 @@
                 <div class="row">
                     <div class="form-group">
                         <label class="form-label" for="textArea">Describe something about yourself</label>
-                        <textarea class="form-control" id="textArea" rows="4" placeholder="Describe here"></textarea>
+                        <textarea class="form-control" id="describe-something" rows="4"
+                            placeholder="Describe here"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h2>Have you had?</h2>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="" id="chiken-pox"> Chicken Pox</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="" id="measles"> Measles</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="" id="covid-19"> Covid-19</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="" id="diabetes"> Diabetes</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="" id="kidney-disease"> Kidney
+                                Disease</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <h2>Select one of them</h2>
+                        <div class="radio">
+                            <label><input type="radio" name="radio-buttons" id="own-or-rent"> Own or Rent</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="radio-buttons" id="unsure"> Unsure</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="radio-buttons" id="have-you-been-vaccinated"> Have you been
+                                vaccinated</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <br>
+                            <label for="desired-salary">Desired Salary/Year</label>
+                            <input type="number" class="form-control" id="desired-salary" required
+                                placeholder="Put salary between $20,000 and $200,000" min="20000" max="200000">
+                            <span id="msg-desired-salary" class="text-danger hid">Salary must be in between $20,000 and
+                                $200,000 </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <br>
+                            <label for="for-real-state">For Real State</label>
+                            <input type="number" class="form-control" id="for-real-state" placeholder="Price for Home">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="user-id">User Name</label>
+                            <input type="text" class="form-control" id="user-name" placeholder="User Name">
+                            <span id="msg-user-name" class="text-danger hid"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password" required>
+                        <p class="text-danger hid">
+                            Password must contain at least:
+                        <ul class=" pass-ul">
+                            <li id="length" class="text-danger hid">Characters between 8 and 20</li>
+                            <li id="A_Z" class="text-danger hid">one uper-case letter A-Z</li>
+                            <li id="a_z" class="text-danger hid">one lower-case letter a-z</li>
+                            <li id="number" class="text-danger hid">one digit 0-9</li>
+                            <li id="specialChar" class="text-danger hid">and on special character !@#$%^&*()_+</li>
+                        </ul>
+                        </p>
+                    </div>
+                    <div class="col-sm-12">
+                        <label for="re-enter-password">Re-Enter Password</label>
+                        <input type="password" class="form-control" id="re-enter-password"
+                            placeholder="Re-Enter Password" required>
+                        <span id="msg-re-enter-password" class="text-danger hid">Passwords must be same</span>
                     </div>
                 </div>
             </div>
+            <br>
+            <button type="submit" class="btn btn-success">Submit Form</button>
         </form>
     </div>
+
+    <script>
+        var form = document.getElementById("form");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            console.log("form prevented to submit");
+
+            validation();
+        });
+
+        function validation() {
+            var valid = {
+
+            }
+            var first_name = document.getElementById("first-name");
+            var middle_name = document.getElementById("middle-name");
+            var last_name = document.getElementById("last-name");
+            var date_of_birth = document.getElementById("date-of-birth");
+            var social_security = document.getElementById("social-security");
+            var address_line_1 = document.getElementById("address-line-1");
+            var address_line_2 = document.getElementById("address-line-2");
+            var user_name = document.getElementById("user-name");
+            var password = document.getElementById("password");
+            // fristName validation
+            if (!((first_name.value.length > 0 && first_name.value.length < 31) && first_name.value.match(/^[A-Za-z\-\`]+$/))) {
+                $("#msg-first-name").show();
+            }
+            // middleName validation
+            if (middle_name.value.length > 0 && middle_name.value.length < 2) {
+                if (!(middle_name.value.match(/^[A-Za-z]+$/))) {
+                    $("#msg-middle-name").show();
+                }
+            } else if (!(middle_name.value.length == 0)) {
+                $("#msg-middle-name").show();
+            }
+            // lastName validation
+            if (!((last_name.value.length > 0 && last_name.value.length < 31) && last_name.value.match(/^[A-Za-z\-\`]+$/))) {
+                $("#msg-last-name").show();
+            }
+            // date validation
+            const d = new Date();
+            let c_year = d.getFullYear();
+            const sd = new Date(date_of_birth);
+            let s_year = sd.getFullYear();
+
+            if (!(c_year == s_year && s_year >= (c_year - 120))) {
+                $("#msg-date-of-birth").show();
+            }
+
+            // socialSecurity validation
+            if (!(social_security.value.length == 9)) {
+                $("#msg-social-security").show();
+            }
+
+            // addressLine1 validation
+            if (!(address_line_1.value.length >= 2 && address_line_1.value.length <= 30)) {
+                $("#msg-address-line-1").show();
+            }
+            if (address_line_2.value.length != 0) {
+                if (!(address_line_2.value.length >= 2 && address_line_2.value.length <= 30)) {
+                    $("#msg-address-line-2").show();
+                }
+            }
+
+            // city validation
+            var city = document.getElementById("city");
+            if (!(city.value.length >= 2 && city.value.length <= 30)) {
+                $("#msg-city").show();
+            }
+
+            // zipCode validation
+            var zip_code = document.getElementById("zip-code");
+            if (!(zip_code.value.length == 5)) {
+                $("#msg-zip-code").show();
+            }
+
+            // email validation
+            var email_address = document.getElementById("email-address");
+            if (!(email_address.value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))) {
+                $("#msg-email-address").show();
+            }
+
+            // desired salary
+            var desired_salary = document.getElementById("desired-salary");
+            if (!(parseInt(desired_salary.value) >= 20000 && parseInt(desired_salary.value) <= 200000)) {
+                $("#msg-desired-salary").show();
+            }
+            // username validation
+            if (user_name.value.length >= 5 && user_name.value.length <= 20) {
+                var username_split = user_name.value.split("");
+                if (username_split[0].match(/^[A-Za-z]+$/)) {
+                    if (user_name.value.match(/^[0-9A-Za-z\-\_]+$/)) {
+                        console.log("Username is valid");
+                    } else {
+                        document.getElementById("").innerHTML = "Onlye dash and underscore is allowed, spaces and other special characters anre not allowed.";
+                    }
+                }
+                else {
+                    document.getElementById("").innerHTML = "Username can not be start with number other symbol."
+                }
+            }
+            else {
+                document.getElementById("").innerHTML = "Characters must be between 5 and 20 characters.";
+            }
+
+            // password validation
+            if (!(password.value.length > 8 && password.value.length < 20)) {
+                $("#length").show();
+            }
+            if (!(password.value.match(/[A-Z]/))) {
+                $("#A_Z").show();
+            }
+            if (!(password.value.match(/[a-z]/))) {
+                $("#a_z").show();
+            }
+            if (!(password.value.match(/[0-9]/))) {
+                $("#number").show();
+            }
+            if (!(password.value.match(/[!\@\#\$\%\^\&\*\(\)\_\+]/))) {
+                $("#specialChar").show();
+            }
+            if (document.getElementById("password").value != document.getElementById("re-enter-password").value) {
+                $("#msg-re-enter-password").show();
+            }
+        }
+    </script>
 </body>
 
 </html>

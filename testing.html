@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="date" id="myDate">
+    <button onclick="myFunc()">Click Me</button>
+    <script>
+        function myFunc() {
+            var myDate = document.getElementById("myDate");
+            const current_date = new Date();
+            let selected_date = new Date(myDate.value);
+            var year = selected_date.getFullYear();
+            console.log(year);
+        }
+    </script>
+</body>
+
+</html>
