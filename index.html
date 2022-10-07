@@ -8,9 +8,14 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Form Validation</title>
     <style>
         .hid {
+            display: none;
+        }
+
+        #display-data {
             display: none;
         }
     </style>
@@ -32,8 +37,8 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="middle-initial">Middle Initial</label>
-                        <input type="text" class="form-control" id="middle-initial" placeholder="Middle Initial">
+                        <label for="middle-name">Middle Initial</label>
+                        <input type="text" class="form-control" id="middle-name" placeholder="Middle Initial">
                         <span id="msg-middle-name" class="text-danger hid">1 or no character, numbers and special
                             characters
                             are not allowed</span>
@@ -179,32 +184,43 @@
                     <div class="col-sm-4">
                         <h2>Have you had?</h2>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="" id="chiken-pox"> Chicken Pox</label>
+                            <label><input type="checkbox" class="have-you-had" value="Chiken Pox" name="have[]"
+                                    id="chiken-pox"> Chicken
+                                Pox</label>
                         </div>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="" id="measles"> Measles</label>
+                            <label><input type="checkbox" class="have-you-had" value="Measles" name="have[]"
+                                    id="measles">
+                                Measles</label>
                         </div>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="" id="covid-19"> Covid-19</label>
+                            <label><input type="checkbox" class="have-you-had" value="Covid-19" name="have[]"
+                                    id="covid-19">
+                                Covid-19</label>
                         </div>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="" id="diabetes"> Diabetes</label>
+                            <label><input type="checkbox" class="have-you-had" value="Diabetes" name="have[]"
+                                    id="diabetes">
+                                Diabetes</label>
                         </div>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="" id="kidney-disease"> Kidney
+                            <label><input type="checkbox" class="have-you-had" value="Kidney Disease" name="have[]"
+                                    id="kidney-disease"> Kidney
                                 Disease</label>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <h2>Select one of them</h2>
                         <div class="radio">
-                            <label><input type="radio" name="radio-buttons" id="own-or-rent"> Own or Rent</label>
+                            <label><input type="radio" name="radio-buttons" id="own-or-rent" value="Oen or Rent"> Own or
+                                Rent</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="radio-buttons" id="unsure"> Unsure</label>
+                            <label><input type="radio" name="radio-buttons" id="unsure" value="Unsure"> Unsure</label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="radio-buttons" id="have-you-been-vaccinated"> Have you been
+                            <label><input type="radio" name="radio-buttons" id="have-you-been-vaccinated"
+                                    value="Have you been vaccinated"> Have you been
                                 vaccinated</label>
                         </div>
                     </div>
@@ -234,7 +250,10 @@
                         <div class="form-group">
                             <label for="user-id">User Name</label>
                             <input type="text" class="form-control" id="user-name" placeholder="User Name">
-                            <span id="msg-user-name" class="text-danger hid"></span>
+                            <span id="msg-user-name" class="text-danger hid">Username can not be start with number other
+                                symbol, Onlye dash and underscore is allowed,
+                                spaces and other special characters anre not allowed, and Characters must be between 5
+                                and 20 characters.</span>
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -260,133 +279,368 @@
                 </div>
             </div>
             <br>
-            <button type="submit" class="btn btn-success">Submit Form</button>
+            <span class="btn btn-info" onclick="validation()">Check Validation</span>
+            <div id="display-data">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td>First Name</td>
+                            <td id="d-first-name"></td>
+                            <td>Middle Name</td>
+                            <td id="d-middle-name"></td>
+                        </tr>
+                        <tr>
+                            <td>Last Name</td>
+                            <td id="d-last-name"></td>
+                            <td>Date of Birth</td>
+                            <td id="d-date-of-birth"></td>
+                        </tr>
+                        <tr>
+                            <td>Social Security</td>
+                            <td id="d-social-security"></td>
+                            <td>Address Line 1</td>
+                            <td id="d-address-line-1"></td>
+                        </tr>
+                        <tr>
+                            <td>Address Line 2</td>
+                            <td id="d-address-line-2"></td>
+                            <td>City</td>
+                            <td id="d-city"></td>
+                        </tr>
+                        <tr>
+                            <td>State</td>
+                            <td id="d-state"></td>
+                            <td>Zip Code</td>
+                            <td id="d-zip-code"></td>
+                        </tr>
+                        <tr>
+                            <td>Email Address</td>
+                            <td id="d-email-address"></td>
+                            <td>Describe something</td>
+                            <td id="d-describe-something"></td>
+                        </tr>
+                        <tr>
+                            <td>Radio Buttons Value</td>
+                            <td id="d-radi-values"></td>
+                            <td>Have you had?</td>
+                            <td id="d-have-you-had"></td>
+                        </tr>
+                        <tr>
+                            <td>Desired Salary</td>
+                            <td id="d-desired-salary"></td>
+                            <td>For Real State</td>
+                            <td id="d-for-real-state"></td>
+                        </tr>
+                        <tr>
+                            <td>Username</td>
+                            <td id="d-user-name"></td>
+                            <td>Password</td>
+                            <td id="d-password"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <button class="btn btn-info" onclick="backCorrect()">Back to Correct</button>
+                <button type="submit" class="btn btn-success">Submit Form</button>
+            </div>
         </form>
     </div>
 
     <script>
-        var form = document.getElementById("form");
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
-            console.log("form prevented to submit");
+        var isValid = 'true';
+        var valid = {
+            'firstName': 'false',
+            'middleName': 'false',
+            'lastName': 'false',
+            'dateOfBirth': 'false',
+            'socialSecurity': 'false',
+            'addressLine1': 'false',
+            'addressLine2': 'false',
+            'city': 'false',
+            'zipCode': 'false',
+            'emailAddress': 'false',
+            'desiredSalary': 'false',
+            'userName': 'false',
+            'password': 'false',
+            'repassword': 'false'
+        }
 
-            validation();
+        var first_name = document.getElementById("first-name");
+        var middle_name = document.getElementById("middle-name");
+        var last_name = document.getElementById("last-name");
+        var date_of_birth = document.getElementById("date-of-birth");
+        var social_security = document.getElementById("social-security");
+        var address_line_1 = document.getElementById("address-line-1");
+        var address_line_2 = document.getElementById("address-line-2");
+        var user_name = document.getElementById("user-name");
+        var password = document.getElementById("password");
+
+        $("#first-name").on("change", function () {
+            if (!((first_name.value.length > 0 && first_name.value.length < 31) && first_name.value.match(/^[A-Za-z\-\`\ ]+$/))) {
+                $("#msg-first-name").show();
+                valid['firstName'] = 'false';
+            } else {
+                $("#msg-first-name").hide();
+                valid['firstName'] = 'true';
+            }
         });
 
-        function validation() {
-            var valid = {
-
-            }
-            var first_name = document.getElementById("first-name");
-            var middle_name = document.getElementById("middle-name");
-            var last_name = document.getElementById("last-name");
-            var date_of_birth = document.getElementById("date-of-birth");
-            var social_security = document.getElementById("social-security");
-            var address_line_1 = document.getElementById("address-line-1");
-            var address_line_2 = document.getElementById("address-line-2");
-            var user_name = document.getElementById("user-name");
-            var password = document.getElementById("password");
-            // fristName validation
-            if (!((first_name.value.length > 0 && first_name.value.length < 31) && first_name.value.match(/^[A-Za-z\-\`]+$/))) {
-                $("#msg-first-name").show();
-            }
+        $("#middle-name").on("change", function () {
             // middleName validation
             if (middle_name.value.length > 0 && middle_name.value.length < 2) {
                 if (!(middle_name.value.match(/^[A-Za-z]+$/))) {
                     $("#msg-middle-name").show();
+                    valid['middleName'] = 'false';
+                } else {
+                    $("#msg-middle-name").hide();
+                    valid['middleName'] = 'true';
                 }
-            } else if (!(middle_name.value.length == 0)) {
+
+            } else if (middle_name.value.length == 0) {
+                $("#msg-middle-name").hide();
+                valid['middleName'] = 'true';
+            } else {
                 $("#msg-middle-name").show();
+                valid['middleName'] = 'false';
             }
+        });
+
+        $("#last-name").on("change", function () {
             // lastName validation
             if (!((last_name.value.length > 0 && last_name.value.length < 31) && last_name.value.match(/^[A-Za-z\-\`]+$/))) {
                 $("#msg-last-name").show();
+                valid['lastName'] = 'false';
+            } else {
+                $("#msg-last-name").hide();
+                valid['lastName'] = 'true';
             }
+        });
+
+        $("#date-of-birth").on("change", function () {
             // date validation
             const d = new Date();
             let c_year = d.getFullYear();
-            const sd = new Date(date_of_birth);
+            const sd = new Date(date_of_birth.value);
             let s_year = sd.getFullYear();
-
-            if (!(c_year == s_year && s_year >= (c_year - 120))) {
+            console.log("c_year: " + c_year);
+            console.log("s_year: " + s_year);
+            console.log("Difference: " + (c_year - 120) + " years");
+            if (s_year <= c_year && s_year >= (c_year - 120)) {
+                $("#msg-date-of-birth").hide();
+                valid['dateOfBirth'] = 'true';
+                console.log('hello');
+            } else {
                 $("#msg-date-of-birth").show();
+                valid['dateOfBirth'] = 'false';
+                console.log('hello2');
             }
+        });
 
+        $("#social-security").on("change", function () {
             // socialSecurity validation
             if (!(social_security.value.length == 9)) {
                 $("#msg-social-security").show();
-            }
+                valid['socialSecurity'] = 'false';
+            } else {
+                $("#msg-social-security").hide();
+                valid['socialSecurity'] = 'true';
 
+            }
+        });
+
+        $("#address-line-1").on("change", function () {
             // addressLine1 validation
             if (!(address_line_1.value.length >= 2 && address_line_1.value.length <= 30)) {
                 $("#msg-address-line-1").show();
+                valid['addressLine1'] = 'false';
+            } else {
+                $("#msg-address-line-1").hide();
+                valid['addressLine1'] = 'true';
             }
+        });
+
+        $("#address-line-2").on("change", function () {
             if (address_line_2.value.length != 0) {
                 if (!(address_line_2.value.length >= 2 && address_line_2.value.length <= 30)) {
                     $("#msg-address-line-2").show();
+                    valid['addressLine2'] = 'false';
+                } else {
+                    $("#msg-address-line-1").hide();
+                    valid['addressLine2'] = 'true';
                 }
+            } else {
+                $("#msg-address-line-1").hide();
+                valid['addressLine2'] = 'true';
             }
+        });
 
+        var city = document.getElementById("city");
+        $("#city").on("change", function () {
             // city validation
-            var city = document.getElementById("city");
             if (!(city.value.length >= 2 && city.value.length <= 30)) {
                 $("#msg-city").show();
+                valid['city'] = 'false';
+            } else {
+                $("#msg-city").hide();
+                valid['city'] = 'true';
             }
+        });
 
+        var zip_code = document.getElementById("zip-code");
+        $("#zip-code").on("change", function () {
             // zipCode validation
-            var zip_code = document.getElementById("zip-code");
             if (!(zip_code.value.length == 5)) {
                 $("#msg-zip-code").show();
+                valid['zipCode'] = 'false';
+            } else {
+                $("#msg-zip-code").hide();
+                valid['zipCode'] = 'true';
             }
+        });
 
+        var email_address = document.getElementById("email-address");
+        $("#email-address").on("change", function () {
             // email validation
-            var email_address = document.getElementById("email-address");
             if (!(email_address.value.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))) {
                 $("#msg-email-address").show();
+                valid['emailAddress'] = 'false';
+            } else {
+                $("#msg-email-address").hide();
+                valid['emailAddress'] = 'true';
             }
+        });
 
+        var desired_salary = document.getElementById("desired-salary");
+        $("#desired-salary").on("change", function () {
             // desired salary
-            var desired_salary = document.getElementById("desired-salary");
             if (!(parseInt(desired_salary.value) >= 20000 && parseInt(desired_salary.value) <= 200000)) {
                 $("#msg-desired-salary").show();
+                valid['desiredSalary'] = 'false';
+            } else {
+                $("#msg-desired-salary").hide();
+                valid['desiredSalary'] = 'true';
             }
+        });
+
+        $("#user-name").on("change", function () {
             // username validation
             if (user_name.value.length >= 5 && user_name.value.length <= 20) {
                 var username_split = user_name.value.split("");
                 if (username_split[0].match(/^[A-Za-z]+$/)) {
                     if (user_name.value.match(/^[0-9A-Za-z\-\_]+$/)) {
                         console.log("Username is valid");
+                        $("#msg-user-name").hide();
+                        valid['userName'] = 'true';
                     } else {
-                        document.getElementById("").innerHTML = "Onlye dash and underscore is allowed, spaces and other special characters anre not allowed.";
+                        $("#msg-user-name").show();
+                        valid['userName'] = 'false';
                     }
                 }
                 else {
-                    document.getElementById("").innerHTML = "Username can not be start with number other symbol."
+                    $("#msg-user-name").show();
+                    valid['userName'] = 'false';
                 }
             }
             else {
-                document.getElementById("").innerHTML = "Characters must be between 5 and 20 characters.";
+                valid['userName'] = 'false';
+                $("#msg-user-name").show();
             }
+        });
 
+        $("#password").on("change", function () {
             // password validation
             if (!(password.value.length > 8 && password.value.length < 20)) {
                 $("#length").show();
+                valid['password'] = 'false';
+            } else {
+                $("#length").hide();
+                valid['password'] = 'true';
             }
             if (!(password.value.match(/[A-Z]/))) {
                 $("#A_Z").show();
+                valid['password'] = 'false';
+            } else {
+                $("#A_Z").hide();
+                valid['password'] = 'true';
             }
             if (!(password.value.match(/[a-z]/))) {
                 $("#a_z").show();
+                valid['password'] = 'false';
+            } else {
+                $("#a_z").hide();
+                valid['password'] = 'true';
             }
             if (!(password.value.match(/[0-9]/))) {
                 $("#number").show();
+                valid['password'] = 'false';
+            } else {
+                $("#number").hide();
+                valid['password'] = 'true';
             }
             if (!(password.value.match(/[!\@\#\$\%\^\&\*\(\)\_\+]/))) {
                 $("#specialChar").show();
+                valid['password'] = 'false';
+            } else {
+                $("#specialChar").hide();
+                valid['password'] = 'true';
             }
+        });
+
+        $("#re-enter-password").on("change", function () {
             if (document.getElementById("password").value != document.getElementById("re-enter-password").value) {
                 $("#msg-re-enter-password").show();
+                valid['repassword'] = 'false';
+            } else {
+                $("#msg-re-enter-password").hide();
+                valid['repassword'] = 'true';
             }
+        });
+        function validation() {
+
+            for (var key in valid) {
+                if (valid[key] == 'false') {
+                    isValid = 'false';
+                } else {
+                    isValid = 'true';
+                }
+            }
+
+            if (isValid == 'true') {
+                $("#display-data").show();
+
+                document.getElementById("d-first-name").innerHTML = first_name.value;
+                document.getElementById("d-middle-name").innerHTML = middle_name.value;
+                document.getElementById("d-last-name").innerHTML = last_name.value;
+                document.getElementById("d-date-of-birth").innerHTML = date_of_birth.value;
+                document.getElementById("d-social-security").innerHTML = social_security.value;
+                document.getElementById("d-address-line-1").innerHTML = address_line_1.value;
+                document.getElementById("d-address-line-2").innerHTML = address_line_2.value;
+                document.getElementById("d-city").innerHTML = city.value;
+                document.getElementById("d-state").innerHTML = document.getElementById('state').value;
+                document.getElementById("d-zip-code").innerHTML = zip_code.value;
+                document.getElementById("d-email-address").innerHTML = email_address.value;
+                document.getElementById("d-describe-something").innerHTML = document.getElementById('describe-something').value;
+                document.getElementById("d-desired-salary").innerHTML = desired_salary.value;
+                document.getElementById("d-for-real-state").innerHTML = document.getElementById("for-real-state").value;
+                document.getElementById("d-user-name").innerHTML = user_name.value;
+                document.getElementById("d-password").innerHTML = password.value;
+                document.getElementById("d-radi-values").innerHTML = $("input[type='radio'][name='radio-buttons']:checked").val();
+
+                // var checkedValue = $('.have-you-had:checked').val();
+                // console.log(checkedValue);
+                var checkedValue = "";
+                var cboxes = document.getElementsByName('have[]');
+                var len = cboxes.length;
+                for (var i = 0; i < len; i++) {
+                    if (cboxes[i].checked == 'checked') {
+                        checkedValue += cboxes[i].value;
+                    }
+                }
+                document.getElementById("d-have-you-had").innerHTML = checkedValue;
+            }
+        }
+        function backCorrect() {
+            $("#display-data").hide();
         }
     </script>
 </body>
